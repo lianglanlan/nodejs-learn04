@@ -8,6 +8,6 @@ nunjucks.configure('views', { autoescape: true, express: app })
 
 app.use('/public/', express.static('public'))
 
-router(app)
+app.use(router)
 
 app.listen(3100, () => console.log('running'))
