@@ -1,16 +1,17 @@
-const fs = require('fs')
 const express = require('express')
+
+const Student = require('./student')
 
 const router = express.Router()
 
 router.get('/students', (req, res) => {
-    fs.readFile('./db.json', 'utf8', (err, data) => {
+    Student.find((err, students) => {
         if (err) {
             return res.status(500).send('server error')
         }
         res.render('index', {
             fruits: ['苹果', '香蕉', '橘子', '梨'],
-            students: JSON.parse(data).students
+            students
         })
     })
 })
