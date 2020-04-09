@@ -37,7 +37,19 @@ router.post('/students/new', (req, res) => {
 })
 
 router.get('/students/edit', (req, res) => {
-    res.send('')
+    res.render('edit', {
+        // Student
+    })
+
+    Student.updateById({
+        id: 1,
+        name: '张小三'
+    }, err => {
+        if (err) {
+            console.log('修改失败')
+        }
+        console.log('修改成功')
+    })
 })
 
 router.post('/students/edit', (req, res) => {

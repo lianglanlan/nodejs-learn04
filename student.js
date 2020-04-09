@@ -52,8 +52,29 @@ exports.save = (student, callback) => {
 /**
 * 更新学生
 */
-exports.update = () => {
+exports.updateById = (student, callback) => {
+    fs.readFile(dbPath, 'utf8', (err, data) => {
+        if (err) {
+            return callback(err)
+        }
+        let students = JSON.parse(data).students
+        let stu = students.find(item => item.id === student.id)
+        for (var key in student) {
+            stu[key] = student[key]
+        }
 
+        const fileData = JSON.stringify({
+            students
+        })
+
+        fs.writeFile(dbPath, fileData, (err) => {
+            if (err) {
+                return callback(err)
+            }
+
+            callback(null)
+        })
+    })
 }
 
 /**
